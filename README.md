@@ -26,9 +26,9 @@ But here's the twist: the **No** button runs away when you try to click it!
 
 ## 🛠️ Customization
 
-- Change text or emojis in `index.html`.
+- Change text or emojis in `tool.html`.
 - Adjust styles in `style.css`.
-- Add actions on button click using JavaScript.
+- slow down animation movement using JS, if you think buttons are moving very fast.
 
 ---
 
