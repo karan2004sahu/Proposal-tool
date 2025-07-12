@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Do You Like Me?</title>
+  <!-- React, ReactDOM & Babel -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .float {
+      animation: float 3s ease-in-out infinite;
+    }
+    .pulse {
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+  </style>
+</head>
+<body class="m-0 p-0">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useRef, useEffect } = React;
+
+    function LoveGame() {
+      const [noStyle, setNoStyle] = useState({ transform: "translate(60vw, 60vh)" });
+      const [yesStyle, setYesStyle] = useState({ transform: "translate(30vw, 60vh)" });
+      const containerRef = useRef(null);
+
+      const moveNoButton = () => {
+        const c = containerRef.current;
+        const w = c.clientWidth - 100;
+        const h = c.clientHeight - 50;
+
+        const x = Math.random() * w;
+        const y = Math.random() * h;
+
+        const newTransform = `translate(${x}px, ${y}px)`;
+        const currentTransform = noStyle.transform;
+
+        setNoStyle({ transform: newTransform });
+        setYesStyle({ transform: currentTransform });
+      };
+
+      return (
+        <div
+          ref={containerRef}
+          className="w-screen h-screen bg-gradient-to-br from-pink-200 via-rose-100 to-red-200 relative overflow-hidden touch-none"
+        >
+          {/* Floating hearts */}
+          <div className="absolute top-4 left-4 text-pink-500 text-4xl float">💖</div>
+          <div className="absolute top-10 right-10 text-red-400 text-3xl pulse">💘</div>
+          <div className="absolute bottom-10 left-10 text-rose-400 text-4xl float">❤️</div>
+
+          <h1 className="absolute top-20 w-full text-center text-4xl sm:text-5xl font-extrabold text-rose-600 drop-shadow-lg">
+            Do you like me? 💌
+          </h1>
+
+          <button
+            onClick={() => alert("Aww, I knew it! 💖")}
+            style={{
+              ...yesStyle,
+              position: "absolute",
+              transition: "transform 0.4s ease",
+            }}
+            className="px-5 py-3 text-lg sm:text-xl bg-pink-500 hover:bg-pink-600 text-white font-semibold rounded-full shadow-lg"
+          >
+            Yes 😍
+          </button>
+
+          <button
+            onMouseEnter={moveNoButton}
+            onTouchStart={moveNoButton}
+            style={{
+              ...noStyle,
+              position: "absolute",
+              transition: "transform 0.4s ease",
+            }}
+            className="px-5 py-3 text-lg sm:text-xl bg-purple-400 hover:bg-purple-500 text-white font-semibold rounded-full shadow-lg"
+          >
+            No 🙈
+          </button>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<LoveGame />);
+  </script>
+</body>
+</html>
