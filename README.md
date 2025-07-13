@@ -12,7 +12,7 @@ But here's the twist: the **No** button runs away when you try to click it!
 - 🏃‍♂️ The **No** button dodges the user's click or tap.
 - 📱 Mobile-friendly and responsive.
 - 🎨 Clean, emoji-rich UI.
-- 🧑‍💻 Built with HTML, CSS, and JavaScript — no libraries or frameworks.
+- 🧑‍💻 Built with HTML, CSS, and JS.
 
 ---
 
